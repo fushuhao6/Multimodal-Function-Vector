@@ -69,9 +69,80 @@ python dataset/generate_synthetic_images.py
 
 ### 2.2 GQA Dataset
 
-> **TODO (Esther):** Add download instructions for the GQA dataset and include the JSON files for the filtered image set and labels.
+We use a filtered subset of the [GQA dataset](https://cs.stanford.edu/people/dorarad/gqa/) focused on visual relational structure.
 
----
+#### Step 1: Download GQA
+
+Download the following from the official GQA release:
+
+* `train_sceneGraphs.json`
+* `val_sceneGraphs.json`
+* GQA images (`images.zip` or full image directory)
+
+After extraction, organize the dataset as:
+
+```
+data/
+└── gqa/
+    └── raw/
+        ├── train_sceneGraphs.json
+        ├── val_sceneGraphs.json
+        └── images/
+            ├── <image_id>.jpg
+            ├── <image_id>.jpg
+            └── ...
+```
+
+#### Step 2: Generate filtered relational dataset
+
+Example:
+
+```bash
+python dataset/prepare_gqa_dataset.py \
+    --relations "holding" "riding" "sitting on" \
+    --min_objects 3 \
+    --max_objects 30 \
+    --min_relations 1 \
+    --max_relations 15 \
+    --min_obj_ratio 0.05 \
+    --max_obj_ratio 0.5 \
+    --output_name gqa_filtered
+```
+
+This produces:
+
+```
+data/gqa/processed/gqa_filtered.json
+```
+
+#### Step 3: Train/Test Split
+
+```bash
+python dataset/split_gqa_dataset.py \
+    --input data/gqa/processed/gqa_filtered.json \
+```
+
+Outputs:
+
+```
+data/gqa/processed/gqa_filtered_train.json
+data/gqa/processed/gqa_filtered_test.json
+data/gqa/processed/gqa_filtered_split_metadata.json
+```
+
+#### Step 4: Using the dataset in experiments
+
+The resulting JSON files are compatible with:
+
+* `GQADataset` (object/relation supervision)
+* `ICLRelationDataset` (in-context learning experiments)
+
+Images are loaded from:
+
+```
+data/gqa/raw/images/
+```
+
 
 ## 3. Adding a New Model
 
