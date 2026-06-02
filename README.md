@@ -84,9 +84,11 @@ After extraction, organize the dataset as:
 ```
 data/
 └── gqa/
-    └── raw/
-        ├── train_sceneGraphs.json
-        ├── val_sceneGraphs.json
+    └── agentic/
+        ├── gqa_filtered_agentic.json
+        ├── gqa_filtered_agentic_split_metadata.json
+        ├── gqa_filtered_agentic_test.json
+        ├── gqa_filtered_agentic_train.json
         └── images/
             ├── <image_id>.jpg
             ├── <image_id>.jpg
@@ -119,7 +121,7 @@ data/gqa/processed/gqa_filtered.json
 
 ```bash
 python dataset/split_gqa_dataset.py \
-    --input data/gqa/processed/gqa_filtered.json \
+    --input data/gqa/processed/gqa_filtered_agentic.json \
 ```
 
 Outputs:
