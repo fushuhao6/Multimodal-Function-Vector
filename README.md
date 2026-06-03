@@ -75,18 +75,16 @@ We use a filtered subset of the [GQA dataset](https://cs.stanford.edu/people/dor
 
 Download the following from the official GQA release:
 
-* `train_sceneGraphs.json`
-* `val_sceneGraphs.json`
 * GQA images (`images.zip` or full image directory)
 
-After extraction, organize the dataset as:
+For agentic and spatial relations, the data is already split into test and train json files.
+
+After extraction, organize the dataset as (example from agentic relations):
 
 ```
 data/
 └── gqa/
     └── agentic/
-        ├── gqa_filtered_agentic.json
-        ├── gqa_filtered_agentic_split_metadata.json
         ├── gqa_filtered_agentic_test.json
         ├── gqa_filtered_agentic_train.json
         └── images/
