@@ -95,44 +95,7 @@ data/
             └── ...
 ```
 
-#### Step 2: Generate filtered relational dataset
-
-Example:
-
-```bash
-python dataset/prepare_gqa_dataset.py \
-    --relations "holding" "riding" "sitting on" \
-    --min_objects 3 \
-    --max_objects 30 \
-    --min_relations 1 \
-    --max_relations 15 \
-    --min_obj_ratio 0.05 \
-    --max_obj_ratio 0.5 \
-    --output_name gqa_filtered
-```
-
-This produces:
-
-```
-data/gqa/processed/gqa_filtered.json
-```
-
-#### Step 3: Train/Test Split
-
-```bash
-python dataset/split_gqa_dataset.py \
-    --input data/gqa/processed/gqa_filtered_agentic.json \
-```
-
-Outputs:
-
-```
-data/gqa/processed/gqa_filtered_train.json
-data/gqa/processed/gqa_filtered_test.json
-data/gqa/processed/gqa_filtered_split_metadata.json
-```
-
-#### Step 4: Using the dataset in experiments
+#### Step 2: Using the dataset in experiments
 
 The resulting JSON files are compatible with:
 
@@ -144,7 +107,6 @@ Images are loaded from:
 ```
 data/gqa/raw/images/
 ```
-
 
 ## 3. Adding a New Model
 
