@@ -46,4 +46,4 @@ lightning_logs/
 # ── Environment ───────────────────────────────────────────────────────────────
 .env
 .venv/
-env/
+env/data/gqa/raw/

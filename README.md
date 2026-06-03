@@ -69,9 +69,42 @@ python dataset/generate_synthetic_images.py
 
 ### 2.2 GQA Dataset
 
-> **TODO (Esther):** Add download instructions for the GQA dataset and include the JSON files for the filtered image set and labels.
+We use a filtered subset of the [GQA dataset](https://cs.stanford.edu/people/dorarad/gqa/) focused on visual relational structure.
 
----
+#### Step 1: Download GQA
+
+Download the following from the official GQA release:
+
+* GQA images (`images.zip` or full image directory)
+
+For agentic and spatial relations, the data is already split into test and train json files.
+
+After extraction, organize the dataset as (example from agentic relations):
+
+```
+data/
+└── gqa/
+    └── agentic/
+        ├── gqa_filtered_agentic_test.json
+        ├── gqa_filtered_agentic_train.json
+        └── images/
+            ├── <image_id>.jpg
+            ├── <image_id>.jpg
+            └── ...
+```
+
+#### Step 2: Using the dataset in experiments
+
+The resulting JSON files are compatible with:
+
+* `GQADataset` (object/relation supervision)
+* `ICLRelationDataset` (in-context learning experiments)
+
+Images are loaded from:
+
+```
+data/gqa/raw/images/
+```
 
 ## 3. Adding a New Model
 
